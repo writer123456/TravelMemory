@@ -1,0 +1,14 @@
+trigger:
+  branches:
+    include:
+    exclude:
+      - main:
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - checkout: self
+  - task: ArchiveFiles@2
+  inputs:
+
