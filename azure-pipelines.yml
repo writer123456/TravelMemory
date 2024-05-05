@@ -1,8 +1,7 @@
 trigger:
   branches:
     include:
-    exclude:
-      - main:
+      - main
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -15,4 +14,11 @@ steps:
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/XYZ.zip'
+  
+  - task: SSH@0
+    inputs:
+      sshEndpoint: # string. Required. SSH service connection. 
+      runOptions: 'commands' # 'commands' | 'script' | 'inline'. Required. Run. Default: commands.
+      commands: |
+        scp $(Build.ArtifactStagingDirectory)/XYZ.zip azureuser@172.210.177.182:/ubuntu/home
 
